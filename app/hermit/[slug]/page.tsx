@@ -2,6 +2,25 @@
 import { notFound, redirect } from "next/navigation"
 import Image from "next/image"
 import { hermits } from "@/data/hermits"
+import type { Metadata } from "next"
+
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}): Promise<Metadata> {
+  const { slug } = await params
+  const hermit = hermits.find(h => h.slugs.includes(slug.toLowerCase()))
+  if (!hermit) return { title: "Hermit Not Found" }
+
+  return {
+    title: hermit.name,
+    icons: {
+      icon: `/avatars/heads/128/${hermit.name}.png`,
+    },
+  }
+}
 
 export function generateStaticParams() {
   return hermits.flatMap(h => h.slugs.map(slug => ({ slug })))
