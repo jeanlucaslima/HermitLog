@@ -1,10 +1,9 @@
 // app/hermit/[slug]/page.tsx
-
 import { notFound, redirect } from "next/navigation"
-import { hermits } from "@/data/hermits"
 import Image from "next/image"
+import { hermits } from "@/data/hermits"
 
-type Props = {
+interface Props {
   params: { slug: string }
 }
 
@@ -20,40 +19,47 @@ export default function HermitPage({ params }: Props) {
   }
 
   return (
-    <div className="max-w-2xl mx-auto py-10 px-4 space-y-6">
+    <main className="p-6 space-y-6">
       <div className="flex items-center space-x-4">
         <Image
-          src={`/avatars/${hermit.avatar}`}
+          src={`/avatars/faces/128/${hermit.avatar}`}
           alt={hermit.name}
-          width={64}
-          height={64}
-          className="rounded-full border"
+          width={96}
+          height={96}
+          className="rounded-md border"
+        />
+        <Image
+          src={`/avatars/heads/128/${hermit.name}.png`}
+          alt={`${hermit.name} Head`}
+          width={96}
+          height={96}
+          className="rounded-md border"
         />
         <div>
           <h1 className="text-2xl font-bold">{hermit.name}</h1>
           <p className="text-sm text-muted-foreground">
-            Minecraft: <span className="font-mono">{hermit.username}</span>
-          </p>
-          <p className="text-sm">
             Status: <span className="capitalize">{hermit.status}</span>
           </p>
         </div>
       </div>
 
-      <div className="text-sm">
+      <section className="space-y-2">
+        <p><strong>Username:</strong> {hermit.username}</p>
+        <p><strong>UUID:</strong> {hermit.uuid}</p>
+        <p><strong>Joined in Season:</strong> {hermit.joinedInSeason}</p>
+        {hermit.leftInSeason && <p><strong>Left in Season:</strong> {hermit.leftInSeason}</p>}
+        <p><strong>Active Seasons:</strong> {hermit.seasonsActive.join(", ")}</p>
         <p>
-          Joined in season <strong>{hermit.joinedInSeason}</strong>
+          <a
+            href={`https://www.youtube.com/channel/${hermit.channelId}`}
+            className="text-blue-600 hover:underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            YouTube Channel
+          </a>
         </p>
-        <p>
-          Active seasons:{" "}
-          <span className="font-mono">{hermit.seasonsActive.join(", ")}</span>
-        </p>
-        {hermit.leftInSeason && (
-          <p>
-            Left in season <strong>{hermit.leftInSeason}</strong>
-          </p>
-        )}
-      </div>
-    </div>
+      </section>
+    </main>
   )
 }
