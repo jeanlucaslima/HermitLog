@@ -3,18 +3,23 @@ import { notFound, redirect } from "next/navigation"
 import Image from "next/image"
 import { hermits } from "@/data/hermits"
 
-interface Props {
-  params: { slug: string }
+export function generateStaticParams() {
+  return hermits.flatMap(h => h.slugs.map(slug => ({ slug })))
 }
 
-export default function HermitPage({ params }: Props) {
-  const slug = params.slug.toLowerCase()
-  const hermit = hermits.find(h => h.slugs.includes(slug))
+// Must use async function with Promise-style `params`
+export default async function HermitPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
+  const { slug } = await params
+  const hermit = hermits.find(h => h.slugs.includes(slug.toLowerCase()))
 
   if (!hermit) return notFound()
 
   const canonicalSlug = hermit.slugs[0].toLowerCase()
-  if (slug !== canonicalSlug) {
+  if (slug.toLowerCase() !== canonicalSlug) {
     redirect(`/hermit/${canonicalSlug}`)
   }
 
