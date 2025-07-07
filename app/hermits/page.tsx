@@ -20,7 +20,7 @@ export default function HermitsPage() {
           {activeHermits.map(hermit => (
             <Link key={hermit.uuid} href={`/hermit/${hermit.slugs[0]}`} className="text-center">
               <Image
-                src={`/avatars/heads/128/${hermit.name}.png`}
+                src={`/avatars/heads/128/${hermit.avatar}`}
                 alt={hermit.name}
                 width={64}
                 height={64}
@@ -38,7 +38,7 @@ export default function HermitsPage() {
           {allHermits.map(hermit => (
             <Link key={hermit.uuid} href={`/hermit/${hermit.slugs[0]}`} className="text-center">
               <Image
-                src={`/avatars/heads/128/${hermit.name}.png`}
+                src={`/avatars/heads/128/${hermit.avatar}`}
                 alt={hermit.name}
                 width={64}
                 height={64}
