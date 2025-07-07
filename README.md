@@ -1,36 +1,125 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# HermitLog
 
-## Getting Started
+**HermitLog** is a fan-made, work-in-progress website that documents and visualizes the activity of the HermitCraft Minecraft SMP server. Built with **Next.js**, **Incremental Static Regeneration (ISR)**, and **shadcn/ui**, the project aims to offer a clean and functional interface for exploring the rich history and dynamics of HermitCraft.
 
-First, run the development server:
+> ⚠️ This project is non-official and not affiliated with HermitCraft, Mojang, or Microsoft.
+
+---
+
+## 🌐 Live Features (MVP)
+
+- 🧙‍♂️ **Hermit Profiles**
+  View details about each Hermit, including avatar, channel info, status, seasons active, and more.
+
+- 📜 **Hermits Directory**
+  A list of all Hermits (active, inactive, and retired), with filters and rendered avatars.
+
+- 🔁 **Slug Redirects**
+  Multiple slugs per Hermit allow friendly access and common typos (e.g., `/grain` redirects to `/grian`).
+
+- 🧩 **Incremental Static Regeneration (ISR)**
+  All pages are statically generated and revalidated periodically for fast performance and live updates.
+
+- 🧠 **About Page**
+  Project background, attribution, and credits.
+
+- 📁 **Scripts Folder**
+  Includes Python scripts to validate UUIDs and fetch avatar/head renders via Crafatar.
+
+- 📸 **Avatars & 3D Heads**
+  Hermits have both face and isometric head renders, available in 128px and 256px, served from `/public`.
+
+- 🌓 **Dark Mode**
+  Theme toggle with system support, powered by `next-themes`.
+
+---
+
+## 🧭 Navigation
+
+- `/` - Home / Landing page
+- `/hermits` - List of all Hermits
+- `/hermit/[slug]` - Hermit profile pages (supports aliases)
+- `/timeline` *(planned)*
+- `/seasons` *(planned)*
+- `/about` - Project information & credits
+
+---
+
+## 🛠 Tech Stack
+
+- [Next.js](https://nextjs.org) with App Router & ISR
+- [shadcn/ui](https://ui.shadcn.com) for design system
+- [Crafatar](https://crafatar.com) for avatar/head images
+- [TypeScript](https://www.typescriptlang.org)
+- [Python](https://www.python.org) for scripting UUID/image fetching
+
+---
+
+## 🔮 Planned Features
+
+- 📆 **Interactive Timeline**
+  Grid or heatmap showing video activity over time by season or Hermit.
+
+- 📺 **Video Tracker**
+  Filter and view latest videos from Hermits with "HermitCraft" in the title.
+
+- ⏳ **Season Pages**
+  Overview pages for each HermitCraft season, including participants, dates, and milestones.
+
+- 🔁 **Auto Sync Script**
+  Optionally integrate YouTube API to sync uploads periodically.
+
+- 📊 **Stats & Trends**
+  Insights on video frequency, Hermit activity, gaps, and return arcs.
+
+- 🐍 **Improved CLI Scripts**
+  Additional scripts for bulk editing, error checking, and image cleanup.
+
+- 🎯 **Search & Fuzzy Matching**
+  Quick search for Hermits, episodes, seasons, or tags.
+
+- 🌐 **Multi-language support** *(optional)*
+  Bilingual (English/Portuguese) layout to reflect the creator's roots.
+
+---
+
+## 🧪 Local Setup
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+git clone https://github.com/jeanlucaslima/HermitLog.git
+cd HermitLog
+pnpm install
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+To fetch and validate assets:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# Fetch/update UUIDs
+python scripts/check_uuids.py
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# Fetch/download avatar and head renders
+python scripts/fetch_avatars.py
+```
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🙏 Credits
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Avatars and heads rendered via [Crafatar](https://crafatar.com)
+- HermitCraft videos and characters by their respective creators
+- UI system based on [shadcn/ui](https://ui.shadcn.com)
+- Icons by [Lucide](https://lucide.dev)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 📫 Contact
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Created by [Jean Lucas](https://github.com/jeanlucaslima)
+Ideas, feedback, or contributions? Open an issue or start a discussion!
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 📄 License
+
+This project is open-source under the MIT License.
